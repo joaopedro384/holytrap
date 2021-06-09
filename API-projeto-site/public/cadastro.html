@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cadastro.css">
+
+</head>
+
+<body>
+    <div class="header">
+
+        <div class="container">
+
+            <h1>HolyTrap</h1>
+
+            <ul class="navbar">
+                <!-- <li><span> <a href="index.html">Home</a></li> -->
+                <li> <a href="sobre.html">Sobre</a> </li>
+                <li> <a href="charts.html">Top Charts</a> </li>
+                <li> <a href="cadastro.html">Cadastro</a> </li>
+                <li> <a href="login.html">Login</a> </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="container2">
+        <center>Cadastre-se</center><br>
+        <form id="form_cadastro" method="post" onsubmit="return entrar()">
+        <input name = "nome" id="id_nome" type="text" placeholder="Nome Completo">
+        <input name = "endereco" id="id_endereco" type="text" placeholder="Endereço">        
+        <input name = "tel"id="id_telefone" type="tel" placeholder="Telefone">
+        <br><br>
+        <input name = "email"id="id_email" type="email" placeholder="Email">
+        <input name = "senha" id="id_senha" type="password" placeholder="Criar senha">
+        <input id="id_rsenha" type="password" placeholder="Repita sua senha"><br>
+        <select name="rapper" id="select_rapper">
+            <option hidden>Escolha seu Rapper favorito</option>
+            <option value="1">Dfideliz</option>
+            <option value="2">Bin</option>
+            <option value="3">Borges</option>
+            <option value="4">Poze</option>
+            <option value="5">Future</option>
+        </select>
+
+        <br><br><button>Cadastrar</button>
+    </form>
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script>
+   function entrar() {
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+
+                window.location.href = 'login.html';
+
+            } else {
+
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+
+                });
+                alert("Dados inválidos. Tente novamente!");
+
+            }
+        });
+
+        return false;
+    }
+</script>
